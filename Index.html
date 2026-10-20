@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nickyj AI Video Studio</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:20px;background:#100e20;color:white;font-family:Arial,sans-serif}
+main{max-width:650px;margin:auto}
+h1{color:#ff65b3}
+p{color:#d0cce0;line-height:1.5}
+.card{background:#211d38;padding:20px;border-radius:18px;margin:18px 0}
+label{display:block;margin-top:14px}
+input,select,textarea,button{width:100%;padding:13px;margin-top:8px;border-radius:9px;font-size:16px}
+input,select,textarea{background:#121020;color:white;border:1px solid #65578a}
+button{background:#ff55a7;color:white;border:0;font-weight:bold;cursor:pointer}
+.result{white-space:pre-wrap;overflow-wrap:anywhere;background:#121020;padding:14px;border-radius:10px;min-height:100px}
+</style>
+</head>
+<body>
+<main>
+<h1>✦ Nickyj AI Video Studio</h1>
+<p>Create video prompts, advert scripts and content ideas for TikTok, Reels and WhatsApp Status.</p>
+<div class="card">
+<h2>🎬 Video Prompt Generator</h2>
+<label>What are you creating?</label>
+<select id="kind">
+<option>Product advert</option>
+<option>Funny viral skit</option>
+<option>Talking baby video</option>
+<option>Dance video</option>
+<option>Cinematic short film</option>
+<option>Educational video</option>
+</select>
+<label>Product, character or topic</label>
+<input id="subject" placeholder="e.g. Pluralinks chin chin">
+<label>Video platform</label>
+<select id="platform">
+<option>TikTok</option>
+<option>Instagram Reels</option>
+<option>WhatsApp Status</option>
+<option>YouTube Shorts</option>
+</select>
+<label>Video style</label>
+<select id="style">
+<option>Cinematic and realistic</option>
+<option>Funny and colourful</option>
+<option>3D animation</option>
+<option>Luxury advert</option>
+<option>Afrobeats music video</option>
+</select>
+<label>Extra details</label>
+<textarea id="details" placeholder="Describe the scene, character, product or message"></textarea>
+<button onclick="generate('prompt')">Generate Video Prompt</button>
+<button onclick="generate('script')">Generate Advert Script</button>
+</div>
+<div class="card">
+<h2>✨ Your Creation</h2>
+<div id="result" class="result">Your generated content will appear here.</div>
+<button onclick="copyResult()">Copy My Creation</button>
+</div>
+<p>Made with ❤️ by Nickyj AI Video Studio</p>
+<p><small>This starter tool creates text prompts and scripts. It does not render finished AI videos.</small></p>
+</main>
+<script>
+function generate(type){
+let kind=document.getElementById('kind').value;
+let subject=document.getElementById('subject').value.trim()||'your product or character';
+let platform=document.getElementById('platform').value;
+let style=document.getElementById('style').value;
+let details=document.getElementById('details').value.trim();
+let result='';
+if(type==='prompt'){
+result='Create a 15-second vertical 9:16 '+kind+' featuring '+subject+'. Visual style: '+style+'. Platform: '+platform+'.\\n\\nOpening: Start with a surprising visual hook in the first 2 seconds.\\n\\nMain scene: Show '+subject+' clearly using smooth camera movement, engaging action, expressive details and professional lighting.\\n\\nEnding: Finish with a memorable shot and a clear call to action. Keep characters and product appearance consistent. Avoid distorted faces, flickering and unwanted text.\\n\\nAdditional details: '+(details||'Use creative storytelling and a polished finish.')+'\\n\\nMake the video engaging, easy to understand and suitable for mobile viewing.';
+}else{
+result='ADVERT SCRIPT: '+subject+'\\nPlatform: '+platform+'\\n\\nHOOK: “Wait! Have you seen this?”\\n\\nSCENE 1: Show '+subject+' in an interesting or surprising way.\\n\\nSCENE 2: Explain its main benefit or reveal the funny moment.\\n\\nENDING: “Follow us for more! Tell us what you think.”\\n\\nVisual style: '+style+'.\\n'+(details?'Extra details: '+details:'')+'\\n\\nEdit this draft to include accurate product details and your own brand message.';
+}
+document.getElementById('result').textContent=result;
+}
+function copyResult(){
+let text=document.getElementById('result').textContent;
+if(navigator.clipboard&&navigator.clipboard.writeText){
+navigator.clipboard.writeText(text).then(()=>alert('Copied!')).catch(()=>alert('Please select the text and copy it.'));
+}else{alert('Press and hold the result text to select and copy it.');}
+}
+</script>
+</body>
+</html>
